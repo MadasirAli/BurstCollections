@@ -23,6 +23,21 @@ namespace andywiecko.BurstCollections
             buffer = new NativeList<T>(capacity, allocator);
         }
 
+        public Span<T> AsSpan() => buffer.AsSpan();
+        public readonly ReadOnlySpan<T> AsReadOnlySpan() => buffer.AsReadOnlySpan();
+
+        public static implicit operator Span<T>(in NativeStack<T> source)
+        {
+            return source.AsSpan();
+        }
+
+        public static implicit operator ReadOnlySpan<T>(in NativeStack<T> source)
+        {
+            return source.AsReadOnlySpan();
+        }
+
+        public void SetCapacity(int capacity) => buffer.SetCapacity(capacity);
+
         public void Clear() => buffer.Clear();
         public void Push(T item) => buffer.Add(item);
         public T Pop()
