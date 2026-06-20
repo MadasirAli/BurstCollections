@@ -36,6 +36,7 @@ namespace andywiecko.BurstCollections
             return source.AsReadOnlySpan();
         }
 
+        public void PushRange(NativeArray<T> values) => buffer.AddRange(values);
         public void SetCapacity(int capacity) => buffer.SetCapacity(capacity);
 
         public void Clear() => buffer.Clear();
